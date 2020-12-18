@@ -1,5 +1,9 @@
 ## Comprehensive prediction of synthetic lethality between paralog pairs in cancer cell lines
-Data processing and analysis code to: derive a bronze standard dataset of SL paralog pairs, identify paralog features predictive of SL, train a random forest classifier for paralog SL prediction, generate and explain paralog SL predictions.
+Data processing and analysis code for the paper of the same name, available on BioRxiv: https://doi.org/10.1101/2020.12.16.423022
+
+Cite as: De Kegel et al. (2020) *Comprehensive prediction of synthetic lethality between paralog pairs in cancer cell lines*. bioRxiv
+
+Supplementary data and all SHAP profiles are available at: http://www.cancergd.org/static/paralogs/
 
 ### Data analysis notebooks overview:
 All the main and supplementary figures and statistics for the manuscript are generated in these notebooks.
