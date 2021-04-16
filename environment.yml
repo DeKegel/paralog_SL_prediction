@@ -7,7 +7,7 @@ channels:
 dependencies:
   - python=3.7
   - scikit-learn=0.23.1
-  - seaborn=0.9.0
+  - seaborn=0.11.1
   - pandas=1.0.1
   - statsmodels=0.11.0
   - biopython
@@ -20,5 +20,8 @@ dependencies:
   - altair
   - matplotlib=3.3.2
   - shap=0.35.0
+  - openpyxl
+  - svgutils
+  - xlwt
 variables:
   3rd_party_dir: G:/My Drive/3rd_party_data
