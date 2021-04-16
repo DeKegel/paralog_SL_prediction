@@ -14,11 +14,11 @@
 #   - Bowtie indexes for hg38
 #   - CCDS gene annotations for GRCh38.p12: release 22, 06/14/2018
 
-# Output: File with guide alignments and corresponding gene mappings - guide_alignments_hg19.csv
+# Output: File with guide alignments and corresponding gene mappings - guide_alignments_hg38.csv
 
 # Set location of bowtie indices and CCDS gene annotations
 third_party_dir <- "/Users/barbaradekegel/Google Drive/3rd_party_data"
-local_dir <- "../../local_data/processed/depmap20Q2"
+local_dir <- "../../local_data/processed/depmap20Q2" # NOTE: just change to sanger for Sanger guides
 
 if (!requireNamespace("BiocManager", quietly = TRUE))
   install.packages("BiocManager")

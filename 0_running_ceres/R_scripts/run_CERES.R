@@ -18,7 +18,7 @@ BiocManager::install("Biostrings")
 BiocManager::install("Rsamtools")
 BiocManager::install("GenomeInfoDb")
 BiocManager::install("BSgenome")
-BiocManager::install("BSgenome.Hsapiens.UCSC.hg19")
+BiocManager::install("BSgenome.Hsapiens.UCSC.hg38")
 BiocManager::install("GenomicRanges")
 
 # Install CERES package
@@ -33,6 +33,7 @@ library(magrittr)
 
 # Set location of bowtie indices, CCDS gene annotations and DepMap inputs
 third_party_dir <- "/Users/barbaradekegel/Google Drive/3rd_party_data"
+# Change to sanger for Sanger CRISPR re-processing, files 1,3,4 below are also different (in comments)
 local_dir <- "../../local_data/processed/depmap20Q2"
 
 bowtie_indexes <- file.path(third_party_dir, "bowtie_indexes", "hg38")
@@ -40,6 +41,7 @@ Sys.setenv(BOWTIE_INDEXES = bowtie_indexes)
 
 # 1. Segmented copy number data from DepMap
 cn_seg_file <- file.path(third_party_dir, "depmap", "20Q2", "CCLE_segment_cn.tsv")
+#cn_seg_file <- file.path(third_party_dir, "sanger", "copy_number.tsv")
 
 # 2. Gene annotations, aligments were mapped to gene coding sequences using CCDS
 gene_annot_file <- file.path(third_party_dir,  "ccds_gene_annotations", "CCDS.20180614.txt")
@@ -47,9 +49,10 @@ gene_annot_file <- file.path(third_party_dir,  "ccds_gene_annotations", "CCDS.20
 # 3. Replicate map: maps replicates to cell lines
 # param replicate_map data.frame with column names `Replicate` and `CellLine`
 rep_map_file <- file.path(third_party_dir, "depmap", "20Q2", "Achilles_replicate_map.tsv")
+#rep_map_file <- file.path(third_party_dir, "sanger", "replicate_map.tsv")
 
 # 4. Guide-level dependency data
-raw_dep_file <- file.path(local_dir, "filtered_lfc_26_05_20.csv")
+raw_dep_file <- file.path(local_dir, "filtered_lfc_16_04_21.csv")
 
 # Generate the guide dep .rds file directly from the .csv - bypass the .gct file
 # Note: If check.names = TRUE, an 'X' is prepended to all column names starting with a number
@@ -57,11 +60,16 @@ guide_dep_tibble <- read_csv(raw_dep_file)
 # Check tibble
 dim(guide_dep_tibble)
 
+# Rename for Broad
+guide_dep_tibble <- rename(guide_dep_tibble, construct_barcode = `Construct Barcode`)
+# Rename for Sanger
+#guide_dep_tibble <- rename(guide_dep_tibble, construct_barcode = X1)
+
 # Convert to matrix
 guide_dep <- guide_dep_tibble %>%
   as.data.frame() %>%
-  set_rownames(.[["Construct Barcode"]]) %>%
-  select(-c(`Construct Barcode`)) %>%
+  set_rownames(.[["construct_barcode"]]) %>%
+  select(-c(`construct_barcode`)) %>%
   as.matrix %>%
   set_rownames(str_extract(rownames(.), "^[ACGT]+")) %>%
   {.[unique(rownames(.)),]} %>%
@@ -70,7 +78,7 @@ guide_dep[1:4,1:4]
 dim(guide_dep)
 
 # Create directory for prepared CERES inputs
-inputs_dir <- file.path("ceres_inputs", "depmap", "20Q2", "2020-05-26")
+inputs_dir <- file.path("ceres_inputs", "depmap", "20Q2", "2021-04-16")
 dir.create(inputs_dir, recursive=T, showWarnings=F)
 
 # Save matrix
@@ -102,4 +110,4 @@ ceres_output <- wrap_ceres(sg_path=file.path(inputs_dir, "guide_sample_dep.Rds")
 ceres_unscaled <- data.frame(ceres_output$gene_essentiality_results$ge_fit)
 head(ceres_unscaled)
 dim(ceres_unscaled)
-write.csv(ceres_unscaled, file.path(data_dir, "ceres_gene_unscaled_26_05_20.csv"))
+write.csv(ceres_unscaled, file.path(local_dir, "ceres_gene_unscaled_16_04_21.csv"))
