@@ -10,14 +10,17 @@ All the main and supplementary figures and statistics for the manuscript are gen
 
 | Notebook                               | Figures                 | Brief description                                        |
 |:---------------------------------------|:------------------------|:---------------------------------------------------------|
-| 01_identify_paralog_SLs_w_depmap | Fig. 1                  | Derive bronze standard dataset of (non-) SL paralog pairs           |
-| 02_indiv_feature_analysis        | Fig. 2A, S1             | Investigate the indv. predictive power of 22 features of paralog pairs |
-| 03_train_classifier              | Fig. 2B                 | Train a random forest classifier w/ bronze standard data |
-| 04_make_predictions              | Fig. 3, S2, S4          | Make predictions for ind. combinatorial screens + all paralog pairs |
-| 05_explain_predictions           | Fig. 4, 5A, 5B, 5D, S5  | Generate SHAP profiles for indv. predictions |
-| 06_compare_slant                 | Fig. S3                 | Compare performance of RF predictions to that of SLant predictions |
-| 07_experimental_validation       | Fig. 5C, 5E             | Graph siRNA screen results for *ASF1A/ASF1B* and *COPS7A/COPS7B* |
-| 08_human_vs_cerevisiae_paralogs  | NA                      | Compare the avg. family size for paralogs in humans vs. cerevisiae yeast |
+| 01_compare_GI_screens                  | Fig. 1, S1              | Investigate bias and cell line specific hits in existing combinatorial screens |
+| 02_identify_paralog_SLs_w_DepMap       | Fig. 2                  | Derive our dataset of robust SL paralog pairs (training data)                  |
+| 03_indiv_feature_analysis              | Fig. 3A, S2, S3         | Investigate the indv. predictive power of 22 features of paralog pairs |
+| 04_train_classifier                    | Fig. 3B                 | Cross-validation of random forest classifier w/ our training data |
+| 05_validate_classifier                 | Fig. 4A, S4, S5         | Validate classifier with combinatorial screen results |
+| 06_make_predictions                    | Fig. 4B, 5A             | Make predictions for all paralog pairs |
+| 07_explain_predictions                 | Fig. 5B,C,D, 6A,C,E, S7 | Generate SHAP profiles for indv. predictions |
+| 08_compare_other_classifiers           | Fig. S6                 | Compare performance of RF predictions to that of SLant predictions |
+| 09_experimental_validation             | Fig. 6D,F               | Graph siRNA screen results for *ASF1A/ASF1B* and *COPS7A/COPS7B* |
+| 10_human_vs_cerevisiae_paralogs        | NA                      | Compare the avg. family size for paralogs in humans vs. cerevisiae yeast |
+| 11_gene_loss_in_tcga                   | Fig. 6B                 | Homozygous deletions frequency of *ASF1A* and *COPS7B* in TCGA |
 
 ### Data processing notebooks overview:
 These notebooks process raw/third party data for use in the analysis.
@@ -32,11 +35,13 @@ These notebooks process raw/third party data for use in the analysis.
 | paralog_features/03_process_orthologs  | Identify (essential) orthologs for paralog pairs and compute conservation score |
 | paralog_features/04_process_gtex_expression   | Compute expression features for paralog pairs |
 | paralog_features/05_merge_all_features | Generate full list of all paralog pairs annotated with all features - some features, incl. age, are computed in this notebook |
-| GI_screens/process_thompson_pairs      | Process gene pairs screened by Thompson et al., filter to overlap with our paralog pairs list  |
-| GI_screens/process_dede_pairs          | Process gene pairs screened by Dede et al., filter to overlap with our paralog pairs list  |
+| GI_screens/process_thompson_pairs      | Process gene pairs screened by Thompson et al.  |
+| GI_screens/process_dede_pairs          | Process gene pairs screened by Dede et al.     |
+| GI_screens/process_parrish_pairs       | Process gene pairs screened by Parrish et al.     |
+| GI_screens/process_chymera_pairs       | Process gene pairs screened by Gonatopoulos-Pournatzis et al.  |
 
 ### Running CERES overview:
-These notebooks + R scripts are used to re-process logfold change data from DepMap CRISPR screens with [CERES](https://github.com/cancerdatasci/ceres), to remove multi-targetting sgRNAs. The output from running all scripts in this folder is available as `local_data\processed\depmap20Q2\gene_scores_26_05_20.csv`. The notebooks can run in the conda environment, but the R scripts should be run independently (e.g. in R studio). Code to install the necessary Bioconductor packages + CERES is included in the R scripts. The R scripts also require the [bowtie](http://bowtie-bio.sourceforge.net/index.shtml) and [samtools](http://samtools.sourceforge.net/) command line tools which are only available for Linux/macOS.
+These notebooks + R scripts are used to re-process logfold change data from DepMap CRISPR screens with [CERES](https://github.com/cancerdatasci/ceres), to remove multi-targetting sgRNAs. The output from running all scripts in this folder is available as `local_data\processed\depmap20Q2\gene_scores_16_04_21.csv` (and similar for Sanger screens). The notebooks can run in the conda environment, but the R scripts should be run independently (e.g. in R studio). Code to install the necessary Bioconductor packages + CERES is included in the R scripts. The R scripts also require the [bowtie](http://bowtie-bio.sourceforge.net/index.shtml) and [samtools](http://samtools.sourceforge.net/) command line tools which are only available for Linux/macOS.
 
 | Order | Notebook or R scripts                  | Brief description                                        |
 |:------|:---------------------------------------|:---------------------------------------------------------|
