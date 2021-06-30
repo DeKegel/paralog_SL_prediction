@@ -16,11 +16,13 @@ All the main and supplementary figures and statistics for the manuscript are gen
 | 04_train_classifier                    | Fig. 3B                 | Cross-validation of random forest classifier w/ our training data |
 | 05_validate_classifier                 | Fig. 4A, S4, S5         | Validate classifier with combinatorial screen results |
 | 06_make_predictions                    | Fig. 4B, 5A             | Make predictions for all paralog pairs |
-| 07_explain_predictions                 | Fig. 5B,C,D, 6A,C,E, S7 | Generate SHAP profiles for indv. predictions |
+| 07_explain_predictions                 | Fig. 5B,C,D, 6A,C,E, S8 | Generate SHAP profiles for indv. predictions |
 | 08_compare_other_classifiers           | Fig. S6                 | Compare performance of RF predictions to that of SLant predictions |
 | 09_experimental_validation             | Fig. 6D,F               | Graph siRNA screen results for *ASF1A/ASF1B* and *COPS7A/COPS7B* |
 | 10_human_vs_cerevisiae_paralogs        | NA                      | Compare the avg. family size for paralogs in humans vs. cerevisiae yeast |
 | 11_gene_loss_in_tcga                   | Fig. 6B                 | Homozygous deletions frequency of *ASF1A* and *COPS7B* in TCGA |
+| 12_test_robustness_of_classifier       | Fig. S7                 | Evaluate robustness of the classifier’s performance and rankings |
+
 
 ### Data processing notebooks overview:
 These notebooks process raw/third party data for use in the analysis.
