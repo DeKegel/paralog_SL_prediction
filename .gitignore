@@ -22,6 +22,9 @@ figures/
 
 # Do not store supplemental files
 local_data/supplemental_files
+local_data/processed/*
+local_data/results/*
+!local_data/results/RF_model.pickle
 
 webpage
 
