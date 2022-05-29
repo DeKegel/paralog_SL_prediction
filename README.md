@@ -1,7 +1,7 @@
 ## Comprehensive prediction of robust synthetic lethality between paralog pairs in cancer cell lines
-Data processing and analysis code for the paper of the same name, available on BioRxiv: https://doi.org/10.1101/2020.12.16.423022
+Data processing and analysis code for the paper of the same name, published in *Cell Systems*: [https://doi.org/10.1101/2020.12.16.423022](https://doi.org/10.1016/j.cels.2021.08.006)
 
-Cite as: De Kegel et al. (2020) *Comprehensive prediction of synthetic lethality between paralog pairs in cancer cell lines*. bioRxiv
+Cite as: De Kegel *et al.* (2021) Comprehensive prediction of robust synthetic lethality between paralog pairs in cancer cell lines. *Cell Systems*
 
 Supplementary data and all SHAP profiles are available at: http://www.cancergd.org/static/paralogs/
 
